@@ -2,10 +2,10 @@ boolean left = true;
 boolean right = false;
 boolean top = true;
 boolean bottom = false;
-int leftTopFill = 0;
-int rightTopFill = 255;
-int leftBottomFill = 255;
-int rightBottomFill = 255;
+int leftTopTransparency = 0;
+int rightTopTransparency = 0;
+int leftBottomTransparency = 0;
+int rightBottomTransparency = 0;
 
 void setup(){
   size(300, 300);
@@ -13,47 +13,9 @@ void setup(){
 
 void draw(){
   createGrid();
-  checkSquare();
+  checkLocation();
+  makeSquare();
   
-  if (left && top){
-    leftTopFill = 0;
-  }
-  else{
-    leftTopFill += 5;
-  }
-  fill(leftTopFill);
-  rect(0, 0, width/2, height/2);
-  
-  
-  
-  if (right && top){
-    rightTopFill = 0;
-  }
-  else{
-    rightTopFill += 5;
-  }
-  fill(rightTopFill);
-  rect(width/2, 0, width/2 - 1, height/2);
-  
-  
-  if (left && bottom){
-    leftBottomFill = 0;
-  }
-  else{
-    leftBottomFill += 5;
-  }
-  fill(leftBottomFill);
-  rect(0, height/2, width/2, height/2 - 1);
-  
-  
-  if (right && bottom){
-    rightBottomFill = 0;
-  }
-  else{
-    rightBottomFill += 5;
-  }
-  fill(rightBottomFill);
-  rect(width/2, height/2, width/2 - 1, height/2 - 1);
 }
 
 void createGrid(){
@@ -62,7 +24,7 @@ void createGrid(){
   line(0, height/2, width, height/2);
 }
 
-void checkSquare(){
+void checkLocation(){
   if (mouseX < width/2){
     left = true;
     right = false;
@@ -79,4 +41,46 @@ void checkSquare(){
     top = false;
     bottom = true;
   }
+}
+
+void makeSquare(){
+  if (left && top){
+    leftTopTransparency = 255;
+  }
+  else{
+    leftTopTransparency -= 5;
+  }
+  fill(255, 0, 0, leftTopTransparency);
+  rect(0, 0, width/2, height/2);
+  
+  
+  
+  if (right && top){
+    rightTopTransparency = 255;
+  }
+  else{
+    rightTopTransparency -= 5;
+  }
+  fill(0, 255, 0, rightTopTransparency);
+  rect(width/2, 0, width/2 - 1, height/2);
+  
+  
+  if (left && bottom){
+    leftBottomTransparency = 255;
+  }
+  else{
+    leftBottomTransparency -= 5;
+  }
+  fill(0, 0, 255, leftBottomTransparency);
+  rect(0, height/2, width/2, height/2 - 1);
+  
+  
+  if (right && bottom){
+    rightBottomTransparency = 255;
+  }
+  else{
+    rightBottomTransparency -= 5;
+  }
+  fill(255, 255, 0, rightBottomTransparency);
+  rect(width/2, height/2, width/2 - 1, height/2 - 1);
 }
