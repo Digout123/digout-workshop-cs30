@@ -5,7 +5,7 @@
  
  A 2-by-2 grid that colours whichever square the mouse is on
  and fades that colour when the mouse is moved off of it.
-*/
+ */
 
 boolean left = true;
 boolean right = false;
@@ -15,6 +15,7 @@ int leftTopTransparency = 0;
 int rightTopTransparency = 0;
 int leftBottomTransparency = 0;
 int rightBottomTransparency = 0;
+int toggle = 0;
 
 
 void setup() {
@@ -56,55 +57,74 @@ void checkLocation() {
 }
 
 
+//Changes the toggle variable
+//0 -> On    1 -> Off
+void mouseReleased() {
+  if (right && bottom) {
+    if (toggle == 0) {
+      toggle = 1;
+    } else { 
+      toggle = 0;
+    }
+  }
+}
+
+
 //This function:
 //    - makes all four squares
 //    - changes the transparency to opaque if the mouse is in the square
 //    - makes the transparency fade once the mouse leaves the square
 //    - turns all the squares opaque if the mouse is pressed in the top left corner
-//    - turns the squares off if the mouse is pressed in the bottom right corner
+//    - toggles squares on and off using the toggle variable
 void makeSquare() {
   if (left && top) { //TOP LEFT CORNER
-    if (mousePressed) {
+    if (toggle == 0) {  
+      if (mousePressed) {
+        leftTopTransparency = 255;
+        rightTopTransparency = 255;
+        leftBottomTransparency = 255;
+        rightBottomTransparency = 255;
+      }
       leftTopTransparency = 255;
-      rightTopTransparency = 255;
-      leftBottomTransparency = 255;
-      rightBottomTransparency = 255;
     }
-    leftTopTransparency = 255;
   } else {
     leftTopTransparency -= 5;
   }
   fill(255, 0, 0, leftTopTransparency);
+  if (toggle == 1) fill(255);
   rect(0, 0, width/2, height/2);
 
 
   if (right && top) { // TOP RIGHT CORNER
-    rightTopTransparency = 255;
+    if (toggle == 0) {
+      rightTopTransparency = 255;
+    }
   } else {
     rightTopTransparency -= 5;
   }
   fill(0, 255, 0, rightTopTransparency);
+  if (toggle == 1) fill(255);
   rect(width/2, 0, width/2 - 1, height/2);
 
 
   if (left && bottom) { //BOTTOM LEFT CORNER
-    leftBottomTransparency = 255;
+    if (toggle == 0) {
+      leftBottomTransparency = 255;
+    }
   } else {
     leftBottomTransparency -= 5;
   }
   fill(0, 0, 255, leftBottomTransparency);
+  if (toggle == 1) fill(255);
   rect(0, height/2, width/2, height/2 - 1);
 
 
   if (right && bottom) { //BOTTOM RIGHT CORNER
-    if (mousePressed) {
-      rightBottomTransparency = 0;
-    } else {
-      rightBottomTransparency = 255;
-    }
+    rightBottomTransparency = 255;
   } else {
     rightBottomTransparency -= 5;
   }
   fill(255, 255, 0, rightBottomTransparency);
+  if (toggle == 1) fill(255);
   rect(width/2, height/2, width/2 - 1, height/2 - 1);
 }
