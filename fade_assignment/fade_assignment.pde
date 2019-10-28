@@ -16,6 +16,7 @@ int rightTopTransparency = 0;
 int leftBottomTransparency = 0;
 int rightBottomTransparency = 0;
 int toggle = 0;
+int toggleTwo = 0;
 
 
 void setup() {
@@ -80,6 +81,9 @@ void makeSquare() {
   if (left && top) { //TOP LEFT CORNER
     if (toggle == 0) {  
       if (mousePressed) {
+        toggleTwo = 1;
+      }
+      if (toggleTwo == 1) {
         leftTopTransparency = 255;
         rightTopTransparency = 255;
         leftBottomTransparency = 255;
@@ -96,6 +100,9 @@ void makeSquare() {
 
 
   if (right && top) { // TOP RIGHT CORNER
+    if (toggleTwo == 1) {
+      toggleTwo = 0;
+    }
     if (toggle == 0) {
       rightTopTransparency = 255;
     }
@@ -108,6 +115,9 @@ void makeSquare() {
 
 
   if (left && bottom) { //BOTTOM LEFT CORNER
+    if (toggleTwo == 1) {
+      toggleTwo = 0;
+    }
     if (toggle == 0) {
       leftBottomTransparency = 255;
     }
@@ -120,6 +130,9 @@ void makeSquare() {
 
 
   if (right && bottom) { //BOTTOM RIGHT CORNER
+    if (toggleTwo == 1) {
+      toggleTwo = 0;
+    }
     rightBottomTransparency = 255;
   } else {
     rightBottomTransparency -= 5;
