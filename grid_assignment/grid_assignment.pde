@@ -1,12 +1,12 @@
-int squareSize = 20;
+float squareSize = 20;
 int colourCode = 0;
-int extraWidth = 0;
-int extraHeight = 0;
+float extraWidth = 0;
+float extraHeight = 0;
 
 
 
 void setup() {
-  size (1000, 400);
+  size (400, 400);
   drawGrid();
 }
 
