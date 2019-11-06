@@ -1,0 +1,93 @@
+float squareWidth;
+float squareHeight;
+int colourCode = 0;
+float extraWidth = 0;
+float extraHeight = 0;
+float squareAmountWidth = 20;
+float squareAmountHeight = 20;
+
+
+
+void setup() {
+  size(763, 457);
+  drawGrid();
+}
+
+
+void draw() {
+}
+
+void keyPressed() {
+  drawGrid();
+}
+
+void mousePressed() {
+  if (mouseButton == LEFT) {
+    clickLeft();
+  } else if (mouseButton == RIGHT) {
+    clickRight();
+  }
+  drawGrid();
+}
+
+void drawGrid() {
+  for (float x = 0; x < width; x += width / squareAmountWidth) {
+    for (float y = 0; y < height; y += height / squareAmountHeight) {
+      colourCode = int(random(4));
+      chooseColour();
+      rect(x, y, width / squareAmountWidth, height / squareAmountHeight);
+    }
+  }
+}
+
+void chooseColour() {
+  if (colourCode == 0) {
+    fill(96, 60, 20);
+  } else if (colourCode == 1) {
+    fill(156, 39, 6);
+  } else if (colourCode == 2) {
+    fill(212, 91, 18);
+  } else if (colourCode == 3) {
+    fill(243, 188, 46);
+  } else if (colourCode == 4) {
+    fill(95, 84, 38);
+  }
+}
+
+void clickLeft() {
+  if (width / squareAmountWidth >= 10) {
+      //squareWidth -= 5;
+      //squareAmountWidth =  width/(int)squareWidth;
+      //extraWidth = width % squareWidth;
+      //extraWidth = extraWidth / squareAmountWidth;
+      //squareWidth -= extraWidth;
+      squareAmountWidth += 2;
+    }
+  if (height / squareAmountHeight >= 10) {
+      //squareHeight -= 5;
+      //squareAmountHeight =  height/(int)squareHeight;
+      //extraHeight = height % squareHeight;
+      //extraHeight = extraHeight / squareAmountHeight;
+      //squareHeight -= extraHeight;
+      squareAmountHeight += 2;
+    }
+}
+
+void clickRight() {
+  if (width / squareAmountWidth < width && squareAmountWidth > 2) {
+      //squareWidth += 5;
+      //squareAmountWidth =  width/(int)squareWidth;
+      //extraWidth = width % squareWidth;
+      //extraWidth = extraWidth / squareAmountWidth;
+      //squareWidth += extraWidth;
+      squareAmountWidth -= 2;
+    }
+    if (height / squareAmountHeight < height && squareAmountHeight > 2) {
+      //squareHeight += 5;
+      //squareAmountHeight =  height/(int)squareHeight;
+      //extraHeight = height % squareHeight;
+      //extraHeight = extraHeight / squareAmountHeight;
+      //squareHeight += extraHeight;
+      squareAmountHeight-= 2;
+    }
+}
