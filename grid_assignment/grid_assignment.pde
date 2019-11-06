@@ -1,7 +1,10 @@
-float squareSize = 20;
+float squareWidth = 20.0;
+float squareHeight = 20.0;
 int colourCode = 0;
 float extraWidth = 0;
 float extraHeight = 0;
+int squareAmountWidth = 0;
+int squareAmountHeight = 0;
 
 
 
@@ -20,38 +23,20 @@ void keyPressed() {
 
 void mousePressed() {
   if (mouseButton == LEFT) {
-    if (squareSize > 5) {
-      squareSize -= 5;
-      extraWidth = width % squareSize;
-      extraHeight = height % squareSize;
-      while (extraWidth != 0 || extraHeight != 0) {
-        squareSize -= 1;
-        extraWidth = width % squareSize;
-        extraHeight = height % squareSize;
-      }
-    }
+    clickLeft();
   } else if (mouseButton == RIGHT) {
-    if (squareSize < width - 5 && squareSize < height - 5) {
-      squareSize += 5;
-      extraWidth = width % squareSize;
-      extraHeight = height % squareSize;
-      while (extraWidth != 0 || extraHeight != 0) {
-        squareSize += 1;
-        extraWidth = width % squareSize;
-        extraHeight = height % squareSize;
-      }
-    }
+    clickRight();
   }
-  println(squareSize);
+  println(squareWidth + "\t" + squareHeight + "\t" + squareAmountWidth + "\t" + squareAmountHeight);
   drawGrid();
 }
 
 void drawGrid() {
-  for (int x = 0; x < width; x += squareSize) {
-    for (int y = 0; y < height; y += squareSize) {
+  for (int x = 0; x < width; x += squareWidth) {
+    for (int y = 0; y < height; y += squareHeight) {
       colourCode = int(random(4));
       chooseColour();
-      rect(x, y, squareSize, squareSize);
+      rect(x, y, squareWidth, squareWidth);
     }
   }
 }
@@ -68,4 +53,46 @@ void chooseColour() {
   } else if (colourCode == 4) {
     fill(95, 84, 38);
   }
+}
+
+void clickLeft() {
+  if (squareWidth >= 10) {
+      squareWidth -= 5;
+      squareAmountWidth =  width/(int)squareWidth;
+      extraWidth = width % squareAmountWidth;
+      while (extraWidth != 0) {
+        squareWidth += extraWidth;
+        extraWidth = width % squareAmountWidth;
+      }
+    }
+  if (squareHeight >= 10) {
+      squareHeight -= 5;
+      squareAmountHeight =  height/(int)squareHeight;
+      extraHeight = height % squareAmountHeight;
+      while (extraHeight != 0) {
+        squareHeight += extraHeight;
+        extraHeight = height % squareAmountHeight;
+      }
+    }
+}
+
+void clickRight() {
+  if (squareWidth <= width) {
+      squareWidth += 5;
+      squareAmountWidth =  width/(int)squareWidth;
+      extraWidth = width % squareAmountWidth;
+      while (extraWidth != 0) {
+        squareWidth += extraWidth;
+        extraWidth = width % squareAmountWidth;
+      }
+    }
+    if (squareHeight <= height) {
+      squareHeight += 5;
+      squareAmountHeight =  height/(int)squareHeight;
+      extraHeight = height % squareAmountHeight;
+      while (extraHeight != 0) {
+        squareHeight += extraHeight;
+        extraHeight = height % squareAmountHeight;
+      }
+    }
 }
